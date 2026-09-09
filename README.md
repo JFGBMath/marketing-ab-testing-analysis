@@ -22,9 +22,8 @@ The marketing team needs a data-backed answer before committing the full ad budg
 3. **Hypothesis testing** — two-proportion z-test for the primary conversion metric.
 4. **Effect size, confidence interval & sample size check** — 95% CI for the difference in conversion rate, and a retrospective power analysis to check how much sample size was actually required.
 5. **Validation** — chi-square test on the same contingency table, confirming the z-test result.
-6. **Business interpretation** — translating the statistical result into a go/no-go recommendation with estimated impact.
-
-*Note: a segment-level heterogeneity check (by day/hour) is a natural next step, not yet included in this version.*
+6. **Segment-level heterogeneity check** — descriptive comparison by day and hour, followed by a formal interaction test (logistic regression, likelihood ratio test) with Bonferroni-corrected day-by-day comparisons.
+7. **Business interpretation** — translating the statistical result into a go/no-go recommendation with estimated impact.
 
 ## Key Results
 
@@ -32,6 +31,7 @@ The marketing team needs a data-backed answer before committing the full ad budg
 - The result is statistically significant (**p < 0.0001**), confirmed by both a one-sided two-proportion z-test and a chi-square test.
 - A retrospective power analysis shows only **~4,401 users per group (~8,800 total)** were needed to detect this effect with 80% power — the experiment ran with **~588,000 users, roughly 67x more than required**. This suggests the test could have concluded faster or with a smaller traffic allocation, freeing capacity to test additional variants.
 - **Recommendation:** roll out the ad campaign — the lift is both statistically robust and practically meaningful.
+- **Heterogeneity check:** the ad outperformed the control group on all 7 days (no reversals), with effect size varying by day (largest gap on Tuesday, smallest on Thursday/Friday). A formal interaction test confirms the effect is not identical across days overall (LLR = 16.22, df = 6, p = 0.0126), though no single day survives a Bonferroni-corrected pairwise comparison — the data shows credible evidence of variation but can't yet pinpoint which day drives it.
 
 ## Repository Structure
 
